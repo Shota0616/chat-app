@@ -1,0 +1,60 @@
+version: '3.8'
+services:
+  back:
+    build: ./back
+    container_name: back
+    volumes:
+      - ./back/src:/usr/src/app
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: 'Asia/Tokyo'
+    tty: true
+    # networks:
+    #   chat_app_net:
+    #     ipv4_address: 192.168.1.1
+
+# networks:
+#   chat_app_net:
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 192.168.0.0/16
+
+  # web:
+  #   build: ./web
+  #   container_name: web
+  #   volumes:
+  #     - ./web/conf/:/etc/nginx/conf.d
+  #     - ./web/uwsgi_params:/etc/nginx/uwsgi_params
+  #     - ./web/static:/var/www/html/static
+  #   ports:
+  #     - "8000:8000"
+  #     #- "443:443"
+  #   environment:
+  #     TZ: 'Asia/Tokyo'
+  #   depends_on:
+  #     - back
+  #   networks:
+  #     app_net:
+  #       ipv4_address: 192.168.0.11
+
+  # db:
+  #   build: ./db
+  #   container_name: db
+  #   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: database
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: password
+  #     TZ: 'Asia/Tokyo'
+  #   volumes:
+  #     - ./db/mysql/:/var/lib/mysql/
+  #     - ./db/.bashrc:/root/.bashrc
+  #   networks:
+  #     app_net:
+  #       ipv4_address: 192.168.0.12
